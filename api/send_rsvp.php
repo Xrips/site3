@@ -1,13 +1,14 @@
 <?php
-// Включаем отображение всех ошибок
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // ============================================
 // НАСТРОЙКИ — ЗАМЕНИ НА СВОИ
 // ============================================
-$botToken = '8537194712:AAEPZyPPkDvYEdJWu3egRg9AKpaSCuUJX80'; // Твой токен
-$chatId = '-1003055593113'; // Твой Chat ID
+$botToken = '8537194712:AAEPZyPPkDvYEdJWu3egRg9AKpaSCuUJX80';
+$chatId = '-1003055593113';
+
+// ============================================
+// ВКЛЮЧАЕМ JSON-ОТВЕТ СРАЗУ
+// ============================================
+header('Content-Type: application/json');
 
 // ============================================
 // ПОЛУЧАЕМ ДАННЫЕ ИЗ ФОРМЫ
@@ -52,25 +53,32 @@ $data = [
     'parse_mode' => 'Markdown'
 ];
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+// Используем file_get_contents (без CURL) — работает всегда
+$options = [
+    'http' => [
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method'  => 'POST',
+        'content' => http_build_query($data),
+        'timeout' => 10,
+        'ignore_errors' => true // Чтобы получить ответ даже при ошибке
+    ]
+];
 
-$response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
+$context = stream_context_create($options);
+$response = file_get_contents($url, false, $context);
 
 // ============================================
 // ОТВЕТ ПОЛЬЗОВАТЕЛЮ
 // ============================================
-header('Content-Type: application/json');
-
-if ($httpCode === 200) {
-    echo json_encode(['success' => true, 'message' => '✅ Спасибо! Ваш ответ отправлен.']);
+if ($response !== false) {
+    // Проверяем, что Telegram вернул ok: true
+    $result = json_decode($response, true);
+    if (isset($result['ok']) && $result['ok'] === true) {
+        echo json_encode(['success' => true, 'message' => '✅ Спасибо! Ваш ответ отправлен.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => '❌ Ошибка Telegram: ' . ($result['description'] ?? 'Неизвестная ошибка')]);
+    }
 } else {
-    echo json_encode(['success' => false, 'message' => '❌ Ошибка отправки. Попробуйте ещё раз.']);
+    echo json_encode(['success' => false, 'message' => '❌ Ошибка соединения с Telegram. Попробуйте ещё раз.']);
 }
 ?>
