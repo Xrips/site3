@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приглашение на свадьбу</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Forum&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+  <header class="hero">
+    <img src="images/header.png" alt="Фоновое изображение" class="hero-image">
+    <div class="overlay">
+      <h1 class="fade-in initials">
+        <span class="initial-a">A</span>
+        <span class="divider">|</span>
+        <span class="initial-g">G</span>
+      </h1>
+      <p class="fade-in names">АНТОН & ГАЯНЭ</p>
+      <p class="fade-in date">24.08.25</p>
+      <p class="fade-in" id="countdown"></p>
+    </div>
+  </header>
+  <section class="details fade-in" id="details">
+    <div class="container">
+      <h2>Дорогие гости!</h2>
+      <p>Мы с радостью приглашаем вас разделить этот особенный день с нами — день, когда два сердца станут одним.</p>
+      <p>24 августа</p>
+    </div>
+  </section>
+  <hr class="section-divider">
+  <section class="program fade-in" id="program">
+    <div class="container">
+      <h2>Программа дня</h2>
+      <ul style="list-style: none; padding: 0; margin: 0; text-align: left; max-width: 340px; margin: 0 auto;">
+        <li style="margin-bottom: 12px;">
+          <span style="color:#a86b5d; font-weight:600; min-width:60px; display:inline-block;">14:40</span>
+          <span>Сбор гостей</span>
+        </li>
+        <li style="margin-bottom: 12px;">
+          <span style="color:#a86b5d; font-weight:600; min-width:60px; display:inline-block;">15:00</span>
+          <span>Начало свадебной церемонии</span>
+          <div style="color:#a86b5d; font-size:0.92em; opacity:0.85; margin-left:65px; margin-top:2px;">
+            (при хорошей погоде — в роще)
+          </div>
+        </li>
+        <li style="margin-bottom: 12px;">
+          <span style="color:#a86b5d; font-weight:600; min-width:60px; display:inline-block;">15:30</span>
+          <span>Фотосессия и фуршет</span>
+        </li>
+        <li style="margin-bottom: 12px;">
+          <span style="color:#a86b5d; font-weight:600; min-width:60px; display:inline-block;">15:00</span>
+          <span>Свадебный банкет</span>
+          <div style="color:#a86b5d; font-size:0.92em; opacity:0.85; margin-left:65px; margin-top:2px;">
+            (средневековый зал)
+          </div>
+        </li>
+        <li>
+          <span style="color:#a86b5d; font-weight:600; min-width:60px; display:inline-block;">22:00</span>
+          <span>Завершение вечера</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <hr class="section-divider divider-2">
+  <section class="timer-section fade-in">
+    <div class="container">
+      <div style="margin-bottom: 10px; color: #a86b5d; font-size: 1.15em; font-weight: 500;">
+        До свадьбы осталось
+      </div>
+      <div class="wedding-timer" id="timer-block">
+        <div class="timer-row">
+          <div class="timer-col">
+            <span class="timer-num" id="days">00</span>
+            <span class="timer-label">дней</span>
+          </div>
+          <div class="timer-divider"></div>
+          <div class="timer-col">
+            <span class="timer-num" id="hours">00</span>
+            <span class="timer-label">часов</span>
+          </div>
+          <div class="timer-divider"></div>
+          <div class="timer-col">
+            <span class="timer-num" id="minutes">00</span>
+            <span class="timer-label">минут</span>
+          </div>
+          <div class="timer-divider"></div>
+          <div class="timer-col">
+            <span class="timer-num" id="seconds">00</span>
+            <span class="timer-label">секунд</span>
+          </div>
+        </div>
+      </div>
+      <img src="images/calendar.png" alt="Грин Хаус" style="max-width: 100%; border-radius: 14px; margin: 24px 0 18px 0;" />
+    </div>
+  </section>
+  <hr class="section-divider divider-3">
+  <section class="dresscode fade-in" id="dresscode">
+    <div class="container">
+      <h2>Дресс-код</h2>
+      <p>Пожалуйста, поддержите атмосферу праздника, придерживаясь следующей палитры:</p>
+      <div class="dresscode-palette">
+        <div class="color-box" data-tooltip="Нежно-бежевый" style="background: #ece3d2;"></div>
+        <div class="color-box" data-tooltip="Кофейный" style="background: #856a57;"></div>
+        <div class="color-box" data-tooltip="Оливковый" style="background: #aebea4;"></div>
+        <div class="color-box" data-tooltip="Светлый песочный" style="background: #dacbb4;"></div>
+        <div class="color-box" data-tooltip="Песочный" style="background: #66573a;"></div>
+        <div class="color-box" data-tooltip="Оливково-зелёный" style="background: #718838;"></div>
+        <div class="color-box" data-tooltip="Тёмно-зелёный" style="background: #486932;"></div>
+        <div class="color-box" data-tooltip="Чёрный" style="background: #010101;"></div>
+      </div>
+    </div>
+  </section>
+  <div id="dresscode-tooltip" class="dresscode-tooltip"></div>
+  <hr class="section-divider divider-4">
+  <section class="place fade-in" id="place">
+    <div class="container">
+      <h2>Локация</h2>
+      <p>Наша свадьба пройдет в бутике-отеле  Грин Хаус</p>
+      <p>Он находится по адресу:<br>
+        <span style="font-weight:500; color:#3a2e1f;">Тюмень, ул. Николая Фёдорова, 9</span>
+      </p>
+      <img src="images/gh.PNG" alt="Грин Хаус" style="border-radius: 10px; margin: 18px 0 12px 0; box-shadow: 0 2px 8px rgba(160,120,80,0.10); max-width: 100%; height: auto;" />
+      <p style="margin-bottom: 12px; color: #3a2e1f; font-size: 1.08em;">
+        Мы подготовили для вас карту, чтобы вы точно добрались и разделили с нами этот замечательный день
+      </p>
+      <div id="map" style="width: 100%; height: 300px; margin-top: 20px;"></div>
+    </div>
+  </section>
+  <hr class="section-divider divider-5">
+  <section class="rsvp fade-in" id="rsvp">
+    <div class="container rsvp-wide">
+      <h2 style="text-align: center;">Подтвердите присутствие</h2>
+      <p style="text-align: center;">Пожалуйста, подтвердите свое присутствие до 10.08.2025, ваш ответ поможет нам при организации торжества.</p>
+      <p></p>
+      <form id="rsvp-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Ваше имя</label>
+          <input type="text" id="name" name="name" placeholder="Введите имя" required />
+        </div>
+        <div class="form-group">
+          <span class="form-label">Вы с нами?</span>
+          <div class="radio-group">
+            <label><input type="radio" name="attendance" value="Да" required /> Да</label>
+            <label><input type="radio" name="attendance" value="Буду + 1" required /> Буду + 1</label>
+            <label><input type="radio" name="attendance" value="Не смогу прийти..." /> Не смогу прийти...</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <span class="form-label">Предпочтения по напиткам:</span>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="drink" value="Белое вино"> Белое вино</label>
+            <label><input type="checkbox" name="drink" value="Красное вино"> Красное вино</label>
+            <label><input type="checkbox" name="drink" value="Шампанское"> Шампанское</label>
+            <label><input type="checkbox" name="drink" value="Виски"> Виски</label>
+            <label><input type="checkbox" name="drink" value="Коньяк"> Коньяк</label>
+            <label><input type="checkbox" name="drink" value="Всё подойдет"> Всё подойдет</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <span class="form-label">Предпочтения по блюдам:</span>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="dish" value="Рыба"> Рыба</label>
+            <label><input type="checkbox" name="dish" value="Свинина"> Свинина</label>
+            <label><input type="checkbox" name="dish" value="Говядина"> Говядина</label>
+          </div>
+        </div>
+        <button type="submit">Подтвердить</button>
+      </form>
+    </div>
+  </section>
+  <footer>
+    <p style="margin-top: 48px; margin-bottom: 0; font-size: 1.35em; text-align: center;">
+      С любовью, Антон & Гаянэ
+    </p>
+  </footer>
+  <script>
+    function handleFadeIn() {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        if (
+          rect.top < windowHeight * 0.9 &&
+          rect.bottom > windowHeight * 0.1
+        ) {
+          el.classList.add('visible');
+        } else {
+          el.classList.remove('visible');
+        }
+      });
+    }
+    handleFadeIn();
+    window.addEventListener('scroll', handleFadeIn);
+    window.addEventListener('resize', handleFadeIn);
+
+    document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Показываем, что отправляем
+    submitBtn.textContent = 'Отправляем...';
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch('/api/send_rsvp.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(result.message);
+            form.reset();
+        } else {
+            alert(result.message || 'Ошибка отправки. Попробуйте позже.');
+        }
+    } catch (error) {
+        alert('❌ Ошибка соединения. Проверьте интернет и попробуйте снова.');
+        console.error('Ошибка:', error);
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+ });
+
+    function updateCountdown() {
+      const weddingDate = new Date('2025-08-24T15:00:00');
+      const now = new Date();
+      let diff = weddingDate - now;
+      if (diff < 0) diff = 0;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    ymaps.ready(function () {
+      const myMap = new ymaps.Map("map", {
+        center: [57.119378, 65.564356],
+        zoom: 16
+      });
+      const myPlacemark = new ymaps.Placemark([57.119378, 65.564356], {
+        hintContent: 'Грин Хаус',
+        balloonContent: 'Ulitsa Nikolaya Fodorova, 9, Tyumen, Tyumen Oblast, 625016'
+      });
+      myMap.geoObjects.add(myPlacemark);
+    });
+
+    (function () {
+      let palette = document.querySelector('.dresscode-palette');
+      let tooltip = document.getElementById('dresscode-tooltip');
+      let dresscodeSection = document.getElementById('dresscode');
+      document.querySelectorAll('.color-box').forEach(box => box.removeAttribute('title'));
+      document.querySelectorAll('.color-box').forEach(box => {
+        box.addEventListener('click', function () {
+          const text = box.getAttribute('data-tooltip');
+          if (tooltip.style.display === 'block' && tooltip.innerText === text) {
+            tooltip.style.display = 'none';
+            tooltip.classList.remove('show');
+            tooltip.innerText = '';
+            return;
+          }
+          tooltip.innerText = text;
+          tooltip.style.display = 'block';
+          setTimeout(() => tooltip.classList.add('show'), 10);
+
+          dresscodeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+      document.addEventListener('mousedown', function (e) {
+        if (!palette.contains(e.target) && e.target !== tooltip) {
+          if (tooltip.classList.contains('show')) {
+            tooltip.classList.remove('show');
+            setTimeout(() => {
+              tooltip.style.display = 'none';
+            }, 450); 
+          }
+        }
+      });
+      document.addEventListener('touchstart', function (e) {
+        if (!palette.contains(e.target) && e.target !== tooltip) {
+          if (tooltip.classList.contains('show')) {
+            tooltip.classList.remove('show');
+            setTimeout(() => {
+              tooltip.style.display = 'none';
+            }, 450);
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
