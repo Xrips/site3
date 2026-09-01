@@ -5,6 +5,6 @@
     }
   },
   "routes": [
-    { "src": "/(.*)", "dest": "/api/send_rsvp.php" }
+    { "src": "/api/submit", "methods": ["POST"], "dest": "/api/send_rsvp.php" }
   ]
 }
