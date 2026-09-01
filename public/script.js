@@ -8,8 +8,3 @@ const observer = new IntersectionObserver((entries) => {
   
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   
-  document.getElementById('rsvp-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Спасибо! Мы записали вас.');
-  });
-  
